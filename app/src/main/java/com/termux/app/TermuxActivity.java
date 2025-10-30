@@ -66,6 +66,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
 import java.util.Arrays;
+import com.termux.view.GLTerminalView;
 
 /**
  * A terminal emulator activity.
@@ -89,7 +90,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
     /**
      * The {@link TerminalView} shown in  {@link TermuxActivity} that displays the terminal.
      */
-    TerminalView mTerminalView;
+    GLTerminalView mTerminalView;
 
     /**
      *  The {@link TerminalViewClient} interface implementation to allow for communication between
@@ -488,6 +489,18 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
 
         // Set termux terminal view
         mTerminalView = findViewById(R.id.terminal_view);
+        // GPU toggle button hookup
+        try {
+            android.view.View btn = findViewById(R.id.toggle_gpu_button);
+            if (btn != null) {
+                btn.setOnClickListener(v -> {
+                    boolean newMode = !mTerminalView.isGpuMode();
+                    mTerminalView.setGpuMode(newMode);
+                    // Optionally save preference
+                });
+            }
+        } catch (Exception e) { }
+    
         mTerminalView.setTerminalViewClient(mTermuxTerminalViewClient);
 
         if (mTermuxTerminalViewClient != null)

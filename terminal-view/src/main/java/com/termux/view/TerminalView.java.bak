@@ -1495,27 +1495,4 @@ public final class TerminalView extends View {
         }
     }
 
-
-
-    // --- Added by termux-opengl patch ---
-    // Expose TerminalRenderer and TerminalBuffer to GL renderer
-    public com.termux.view.TerminalRenderer getTerminalRenderer() {
-        return this.mRenderer;
-    }
-
-    public com.termux.terminal.TerminalBuffer getTerminalBuffer() {
-        return this.mBuffer;
-    }
-
-    // Convenience setters used by GLTerminalView
-    public void setTerminalRenderer(com.termux.view.TerminalRenderer r) {
-        this.mRenderer = r;
-    }
-
-    public void setTerminalBuffer(Object b) {
-        if (b instanceof com.termux.terminal.TerminalBuffer) {
-            this.mBuffer = (com.termux.terminal.TerminalBuffer)b;
-        }
-    }
-    // --- end patch ---
 }
